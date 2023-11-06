@@ -1,0 +1,65 @@
+{%extends 'base.html'%}
+{%block body%}
+
+<div class="container my-2">
+    <h1 class="justify-content-center">ToDo List</h1>
+    <form action="/" method="POST">
+        <div class="form-group">
+            <label for="title">Enter Your tasks</label>
+            <input type="text" id="title" name="title" class="form-control" placeholder="Task">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail">Task Description</label>
+            <input type="text" class="form-control" name="desc" placeholder="write about task">
+        </div>
+        <button type="submit" class="btn btn-primary">Add to TODO List</button>
+    </form>
+
+</div>
+<div class="container my-5">
+    <table class="table">
+        <thead>
+            {% if lists|length ==0 %}
+            <div class="alert alert-success">
+                <h3>You don't have any task. Add new tasks</h3>
+            </div>
+            {%else%}
+            <tr>
+                <th scope="col">S.No</th>
+                <th scope="col">Tasks</th>
+                <th scope="col" class="col-5">Description</th>
+                <th scope="col">Date Created</th>
+                <th scope="col">Action</th>
+            </tr>
+            {% endif %}
+        </thead>
+        <tbody>
+            {% for list in lists %}
+            <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{list.title}}</td>
+                <td>{{list.desc}}</td>
+                <td>{{list.date_created}}</td>
+                <!-- <td><button class="btn btn-success mx-1 my-1 btn-sm">Edit</button><button class="btn btn-danger mx-1 my-1 btn-sm">Delete</button></td> -->
+                <td>
+                    <a href="update/{{list.sno}}"> <button class="btn btn-success btn-sm mx-1 my-1 ">Edit</button></a>
+                    <a href="delete/{{list.sno}}"><button class="btn btn-danger btn-sm mx-1 my-1">Delete</button></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+{%endblock body%}
